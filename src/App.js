@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {
   InputGroup,
@@ -9,6 +8,9 @@ import {
  } from 'reactstrap';
 import GoogleMapReact from 'google-map-react';
 
+// TODO: Should be ommited!!!
+const GOOGLE_MAP_KEY = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') ? "AIzaSyAPcDa3xgIACldjPxgQNfIpvK-OrrPeQWQ" : "AIzaSyAUnr5kDABtuQ_f0L3jLh-X1hu1Sqtj39Y";
+console.log(GOOGLE_MAP_KEY);
 const SEARCH_KEYWORD = "Type your keyword here ...";
 const SEARCH_BUTTON = "Search";
 
@@ -21,18 +23,14 @@ class App extends Component {
     zoom: 1,
   };
 
-  constructor(props) {
-    super(props);
-  }
-
-  // <AnyReactComponent
-  // lat={59.955413}
-  // lng={30.337844}
-  // text={'Kreyser Avrora'}/>
   render() {
     return (
       <div style={styles.container} className="App">
         <GoogleMapReact
+          bootstrapURLKeys={{
+            key:GOOGLE_MAP_KEY,
+            language: 'en',
+          }}
           style={styles.map}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}>
