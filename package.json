@@ -1,7 +1,7 @@
 {
-  "name": "lavender-client",
+  "name": "lavender",
   "version": "0.1.0",
-  "homepage": "http://triplea24.github.io/lavender",
+  "homepage": "https://triplea24.github.io/lavender",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.0.0",
