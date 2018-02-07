@@ -4,49 +4,42 @@ import './App.css';
 import {
   InputGroup,
   InputGroupAddon,
-  InputGroupButtonDropdown,
-  InputGroupDropdown,
   Input,
   Button,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
  } from 'reactstrap';
+import GoogleMapReact from 'google-map-react';
 
-const SEARCH_KEYWORD = "Search your keyword here ..."
+const SEARCH_KEYWORD = "Type your keyword here ...";
+const SEARCH_BUTTON = "Search";
+
+// const AnyReactComponent = ({ text }) => <Button color="primary">{SEARCH_BUTTON}</Button>;
 
 class App extends Component {
+  
+  static defaultProps = {
+    center: {lat: 32.4279, lng: 53.6880},
+    zoom: 1,
+  };
+
   constructor(props) {
     super(props);
-
-    this.toggleDropDown = this.toggleDropDown.bind(this);
-    this.toggleSplit = this.toggleSplit.bind(this);
-    this.state = {
-      dropdownOpen: false,
-      splitButtonOpen: false
-    };
   }
 
-  toggleDropDown() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
-  }
-
-  toggleSplit() {
-    this.setState({
-      splitButtonOpen: !this.state.splitButtonOpen
-    });
-  }
+  // <AnyReactComponent
+  // lat={59.955413}
+  // lng={30.337844}
+  // text={'Kreyser Avrora'}/>
   render() {
     return (
       <div style={styles.container} className="App">
+        <GoogleMapReact
+          style={styles.map}
+          defaultCenter={this.props.center}
+          defaultZoom={this.props.zoom}>
+        </GoogleMapReact>
         <InputGroup style={styles.search}>
-          <InputGroupButtonDropdown addonType="prepend" isOpen={this.state.splitButtonOpen} toggle={this.toggleSplit}>
-          </InputGroupButtonDropdown>
           <Input placeholder={SEARCH_KEYWORD} />
-          <InputGroupAddon addonType="append"><Button color="secondary">{"I'm a button"}</Button></InputGroupAddon>
+          <InputGroupAddon addonType="append"><Button color="primary">{SEARCH_BUTTON}</Button></InputGroupAddon>
         </InputGroup>
       </div>
     );
@@ -64,10 +57,17 @@ class App extends Component {
 
 const styles = {
   container:{
-
+    display: 'flex', 
+    justifyContent: 'center',
   },
   search:{
-    padding:20,
+    padding:10,
+    width:500,
+    height:100,
+  },
+  map:{
+    width:1,
+    height: 1,
   }
 };
 
